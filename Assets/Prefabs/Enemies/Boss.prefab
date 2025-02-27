@@ -11,12 +11,12 @@ GameObject:
   - component: {fileID: 7721356494849940957}
   - component: {fileID: 2830420535861341863}
   - component: {fileID: 8730296863800300851}
-  - component: {fileID: 8906873789553459016}
   - component: {fileID: 1430900247560617225}
   - component: {fileID: 2124211160060770884}
-  - component: {fileID: 8361024023471895848}
+  - component: {fileID: 3966622218526412262}
+  - component: {fileID: 1340324210996271501}
   m_Layer: 3
-  m_Name: Enemy
+  m_Name: Boss
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -32,7 +32,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -2.53, y: 1.53, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -81,8 +81,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
-  m_Color: {r: 0.52338195, g: 0.284355, b: 0.801, a: 1}
+  m_Sprite: {fileID: 2747690628134850419, guid: 16037dbd798344f57a526d53d48f5ead, type: 3}
+  m_Color: {r: 1, g: 0, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -119,24 +119,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!114 &8906873789553459016
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4368807937532126786}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 88291b90c4b935c488dc2ad3c92f8d0b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxHealth: 5
-  destroyParticle: {fileID: 0}
-  pillow: {fileID: 4147960885588717861, guid: 4c69f4db61c8acd408e5bbcac22f6c3d, type: 3}
-  minPillows: 1
-  maxPillows: 2
-  spawnRange: 1
 --- !u!114 &1430900247560617225
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -149,14 +131,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a27a406b6dafca4eb22bb494ad05843, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3
-  speedVariance: 0.25
-  acceleration: 1
-  accelerationVariance: 0.125
-  playerDetectionDistance: 5
-  attackRange: 1.3
+  speed: 2
+  speedVariance: 0
+  acceleration: 4
+  accelerationVariance: 0
+  playerDetectionDistance: 20
+  attackRange: 2
   attackCD: 1
-  damage: 1
+  damage: 5
 --- !u!114 &2124211160060770884
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -175,8 +157,8 @@ MonoBehaviour:
   dir: {x: 1, y: 0}
   attackDistance: 0.85
   attackRadius: 0.32
---- !u!61 &8361024023471895848
-BoxCollider2D:
+--- !u!58 &3966622218526412262
+CircleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -210,14 +192,22 @@ BoxCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
-    newSize: {x: 1, y: 1}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0
+  m_Radius: 0.46875
+--- !u!114 &1340324210996271501
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4368807937532126786}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffcc8c1d4bd936846a123a3f6c9af0c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 255
+  destroyParticle: {fileID: 0}
+  pillow: {fileID: 4147960885588717861, guid: 4c69f4db61c8acd408e5bbcac22f6c3d, type: 3}
+  minPillows: 0
+  maxPillows: 0
+  spawnRange: 0

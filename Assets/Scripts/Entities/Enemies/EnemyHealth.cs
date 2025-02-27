@@ -9,8 +9,7 @@ public class EnemyHealth : MonoBehaviour
     //Health Values
     float health;
 
-    [SerializeField]
-    float maxHealth;
+    static float maxHealth = 5;
 
     [SerializeField]
     GameObject destroyParticle, pillow;
@@ -18,12 +17,13 @@ public class EnemyHealth : MonoBehaviour
     [SerializeField]
     float minPillows, maxPillows, spawnRange;
 
-    private void Start()
+    public void Start()
     {
         health = maxHealth;
+        maxHealth *= 1.01f;
     }
-
-    public void TakeDamage(float damage)
+    //Now virtual
+    public virtual void TakeDamage(float damage)
     {
         health -= damage;
 
@@ -57,4 +57,6 @@ public class EnemyHealth : MonoBehaviour
             Instantiate(pillow, transform.position + spawnPosition, Quaternion.identity);
         }
     }
+    public float getHealth() { return health; }
+    public void setHealth(float f) { health = f; }
 }

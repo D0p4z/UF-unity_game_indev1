@@ -16,7 +16,6 @@ public class BuildingHealth : MonoBehaviour
     public bool TakeDamage(int damage) {
 
         currentHealth -= damage;
-        print("Building took damage, currenthp: " + currentHealth);
         if (currentHealth <= 0) {
             print("Building destroyed");
             PathfindingGrid.instance.RemoveBuilding(transform.position);

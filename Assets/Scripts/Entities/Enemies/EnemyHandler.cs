@@ -50,9 +50,9 @@ public class EnemyHandler : MonoBehaviour {
         pathfinder = Pathfinding.instance;
     }
     IEnumerator GetPath(Vector2 targetPos) {
-        Debug.Log("Getting path");
+        //Debug.Log("Getting path");
         path = pathfinder.FindPath(transform.position, targetPos).ToList();
-        Debug.Log("Path found " + path.Count);
+        //Debug.Log("Path found " + path.Count);
         yield return path;
     }
 
@@ -79,10 +79,14 @@ public class EnemyHandler : MonoBehaviour {
         } else{
             //The deltatime is added to make sure that low end devices don't break the pathfinding
             float diff = newNodeDistance * (Time.deltaTime * 144);
-            if (Vector2.Distance(transform.position, currentTarget) < diff) {
+            /*if (Vector2.Distance(transform.position, currentTarget) < diff) {
+                path.Remove(path[0]);
+            }*/
+            currentTarget = path[0].worldPosition;
+            if (Vector2.Distance(transform.position, currentTarget) < diff)
+            {
                 path.Remove(path[0]);
             }
-            currentTarget = path[0].worldPosition;
         } 
 
         Vector2 _dir = currentTarget - new Vector2(transform.position.x, transform.position.y);

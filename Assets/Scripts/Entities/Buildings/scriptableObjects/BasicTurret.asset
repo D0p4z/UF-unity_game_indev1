@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   buildingName: 
   buildingCost: 3
-  buildingHealth: 10
+  buildingHealth: 100
   buildingDamage: 0
   buildingRange: 0
   buildingDescription: 

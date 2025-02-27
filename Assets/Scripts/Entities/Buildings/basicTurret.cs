@@ -53,6 +53,7 @@ public class basicTurret : MonoBehaviour
             if (shotCDTime >= shotCD && diff > shootLerpDiff) {
                 shootTarget();
                 shotCDTime = 0;
+                GetComponent<BuildingHealth>().TakeDamage(1);
             }
 
         } else {
