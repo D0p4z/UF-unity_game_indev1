@@ -137,8 +137,8 @@ MonoBehaviour:
   accelerationVariance: 0
   playerDetectionDistance: 20
   attackRange: 2
-  attackCD: 1
-  damage: 5
+  attackCD: 0.25
+  damage: 10
 --- !u!114 &2124211160060770884
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -155,8 +155,8 @@ MonoBehaviour:
   refreshPath: 0
   newNodeDistance: 0.5
   dir: {x: 1, y: 0}
-  attackDistance: 0.85
-  attackRadius: 0.32
+  attackDistance: 1
+  attackRadius: 0.5
 --- !u!58 &3966622218526412262
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -205,9 +205,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffcc8c1d4bd936846a123a3f6c9af0c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 255
   destroyParticle: {fileID: 0}
   pillow: {fileID: 4147960885588717861, guid: 4c69f4db61c8acd408e5bbcac22f6c3d, type: 3}
-  minPillows: 0
-  maxPillows: 0
-  spawnRange: 0
+  minPillows: 10
+  maxPillows: 15
+  spawnRange: 1

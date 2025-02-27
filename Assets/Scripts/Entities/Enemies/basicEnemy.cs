@@ -49,8 +49,6 @@ public class basicEnemy : MonoBehaviour
             enemyHandler.attack(damage);
             time = attackCD;
         }
-
-        //Needs error handling, returns "index out of range. must be non negative and less than the size of the collection" (still works tho)
         if (playerDistance <= playerDetectionDistance && playerDistance < bedDistance) {
             dir = enemyHandler.moveDir(playerPosition.position);
         } else {

@@ -52,7 +52,7 @@ public class EnemySpawner : MonoBehaviour
         //(Changed) y is calculated with Math.sqrt(1-Math.Pow(x,2f)) so the vector is already normalized
         //aside for some floating point arithmetic errors
         Vector2 spawnPos = new Vector2(x,
-            (float)(2*Math.Sqrt(1 - Math.Pow(x, 2f))-1)
+            (float)(2*(Math.Sqrt(1 - Math.Pow(x, 2f)))-1)
             ) * minSpawnDist;
         print("("+ spawnPos.x+","+spawnPos.y+")");
         for (int i = 0; i < enemiesToSpawn; i++)
