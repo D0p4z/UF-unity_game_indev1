@@ -49,6 +49,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Repair",
+                    "type": "Button",
+                    "id": "b9ba5163-32ca-422b-b13c-b905e5ff563f",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -131,17 +140,6 @@
                 },
                 {
                     "name": "",
-                    "id": "91aca1f8-9dc0-4dfb-8885-05c52a8d2b54",
-                    "path": "",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "MenuButton",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "26f52166-e152-4901-8262-c35b2046de0e",
                     "path": "<Keyboard>/escape",
                     "interactions": "",
@@ -153,8 +151,8 @@
                 },
                 {
                     "name": "",
-                    "id": "28d5ffe3-cd5e-49b3-be94-080b9c70fe92",
-                    "path": "",
+                    "id": "79b677a4-514c-486c-8b00-55827d918d48",
+                    "path": "<Keyboard>/p",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -164,12 +162,12 @@
                 },
                 {
                     "name": "",
-                    "id": "79b677a4-514c-486c-8b00-55827d918d48",
-                    "path": "<Keyboard>/p",
+                    "id": "c3cda522-68e1-4865-8046-7f7e383d3e61",
+                    "path": "<Keyboard>/r",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "DebugToggle",
+                    "action": "Repair",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

@@ -121,6 +121,21 @@ public class PlayerHand : MonoBehaviour
             Debug.Log("Cannot place building here");
     }
 
+    public void repair()
+    {
+        if (pillows < 1)
+        {
+            Debug.Log("No pillows to repair");
+            return;
+        }
+        if (grid.RepairBuilding(buildings[selectedBuilding].buildingPrefab))
+        {
+            pillows--;
+            Debug.Log("Repaired");
+        }
+        else Debug.Log("Failed to Repair");
+    }
+
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.white;

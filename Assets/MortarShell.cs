@@ -25,7 +25,7 @@ public class MortarShell : turretProjectile
     }
     new public void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.GetComponent<GameObject>().GetComponent<basicEnemy>()!=null)
+        if(collision.GetComponent<basicEnemy>()!=null)
             Detonate();
     }
     void Detonate()

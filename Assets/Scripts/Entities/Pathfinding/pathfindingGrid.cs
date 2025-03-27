@@ -66,6 +66,8 @@ public class PathfindingGrid : MonoBehaviour
 
     public bool CreateBuilding(GameObject building) {
         Node node = NodeFromWorldPoint(buildPlacement.position);
+        if (node.worldPosition.y == 0.5f && (node.worldPosition.x == 0.5 || node.worldPosition.x == -0.5f))
+            return false;
         Node playerNode = NodeFromWorldPoint(player.position);
         if (node != playerNode&& node.building == null && node.walkable) {
                 node.building = Instantiate(building, node.worldPosition, Quaternion.identity);
@@ -77,7 +79,6 @@ public class PathfindingGrid : MonoBehaviour
                 enemies.ForEach(enemy => enemy.refreshPath = true);
             return true;
         }
-        //returns null if unable to create building
         return false;
     }
 
@@ -98,7 +99,7 @@ public class PathfindingGrid : MonoBehaviour
     public Node NodeFromWorldPoint(Vector3 worldPosition) {
         float percentX = (worldPosition.x + gridWorldSize.x / 2) / gridWorldSize.x;
         float percentY = (worldPosition.y + gridWorldSize.y / 2) / gridWorldSize.y;
-
+        
         int x = Mathf.FloorToInt(Mathf.Clamp((gridSizeX) * percentX, 0, gridSizeX - 1));
         int y = Mathf.FloorToInt(Mathf.Clamp((gridSizeY) * percentY, 0, gridSizeY - 1));
         //int y = Mathf.RoundToInt((gridSizeY) * percentY) + 1;
@@ -125,6 +126,19 @@ public class PathfindingGrid : MonoBehaviour
         }
 
         return neighbours;
+    }
+
+    public bool RepairBuilding(GameObject building)
+    {
+        Node node = NodeFromWorldPoint(buildPlacement.position);
+        if (node.worldPosition.y == 0.5f && (node.worldPosition.x == 0.5 || node.worldPosition.x == -0.5f))
+            return false;
+        if (node.building != null&& node.building.GetComponent<BuildingHealth>().currentHealth != node.building.GetComponent<BuildingHealth>().buildingScriptableObject.buildingHealth)
+        {
+            node.building.GetComponent<BuildingHealth>().currentHealth = node.building.GetComponent<BuildingHealth>().buildingScriptableObject.buildingHealth;
+            return true;
+        }
+        return false;
     }
 
     public List<Node> path;
