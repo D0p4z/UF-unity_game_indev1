@@ -132,8 +132,15 @@ public class PlayerHand : MonoBehaviour
         {
             pillows--;
             Debug.Log("Repaired");
+            return;
         }
-        else Debug.Log("Failed to Repair");
+        //Upgrades can only happen to full health buildings
+        else
+        {
+            //Decreases pillows by repairCost if it can upgrade
+            pillows -=grid.UpgradeBuilding(buildings[selectedBuilding].buildingPrefab,pillows);
+        }
+        Debug.Log("Failed to Repair");
     }
 
     private void OnDrawGizmos()

@@ -7,7 +7,7 @@ public class basicTurret : MonoBehaviour
     Turret turret;
 
     [SerializeField]
-    float range, projectileSpeed, shotCD, lerpSpeed;
+    public float range, projectileSpeed, shotCD, lerpSpeed;
 
     [SerializeField]
     [Range(0f, .5f)]

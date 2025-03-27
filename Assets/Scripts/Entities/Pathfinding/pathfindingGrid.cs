@@ -70,13 +70,12 @@ public class PathfindingGrid : MonoBehaviour
             return false;
         Node playerNode = NodeFromWorldPoint(player.position);
         if (node != playerNode&& node.building == null && node.walkable) {
-                node.building = Instantiate(building, node.worldPosition, Quaternion.identity);
+            node.building = Instantiate(building, node.worldPosition, Quaternion.identity);
+            //For the sake of a cleaner hierarchy
+            node.building.transform.parent = transform;
 
-                //For the sake of a cleaner hierarchy
-                node.building.transform.parent = transform;
-
-                //Clear path for all enemies if a building is placed => they need to find a new path
-                enemies.ForEach(enemy => enemy.refreshPath = true);
+            //Clear path for all enemies if a building is placed => they need to find a new path
+            enemies.ForEach(enemy => enemy.refreshPath = true);
             return true;
         }
         return false;
@@ -127,7 +126,7 @@ public class PathfindingGrid : MonoBehaviour
 
         return neighbours;
     }
-
+    //If building is below max health
     public bool RepairBuilding(GameObject building)
     {
         Node node = NodeFromWorldPoint(buildPlacement.position);
@@ -139,6 +138,21 @@ public class PathfindingGrid : MonoBehaviour
             return true;
         }
         return false;
+    }
+    //If building is upgradeable (at maximum health), call upgrade
+    //pillows added as argument to check if the cost can be paid (still pays cost in PlayerHand)
+    //Returns the repair cost if upgraded, 0 otherwise
+    public int UpgradeBuilding(GameObject building, int pillows)
+    {
+        Node node = NodeFromWorldPoint(buildPlacement.position);
+        if (node.building != null
+            &&node.building.GetComponent<BuildingHealth>().currentHealth == node.building.GetComponent<BuildingHealth>().buildingScriptableObject.buildingHealth
+            &&pillows>=node.building.GetComponent<BuildingHealth>().repairCost)
+        {
+            node.building.GetComponent<BuildingHealth>().Upgrade();
+            return node.building.GetComponent<BuildingHealth>().repairCost;
+        }
+        return 0;
     }
 
     public List<Node> path;
