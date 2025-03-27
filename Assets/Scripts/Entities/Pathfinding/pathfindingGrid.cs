@@ -67,17 +67,17 @@ public class PathfindingGrid : MonoBehaviour
     public bool CreateBuilding(GameObject building) {
         Node node = NodeFromWorldPoint(buildPlacement.position);
         Node playerNode = NodeFromWorldPoint(player.position);
-        if (node.walkable && node != playerNode && node.building == null) {
-            node.building = Instantiate(building, node.worldPosition, Quaternion.identity);
+        if (node != playerNode&& node.building == null && node.walkable) {
+                node.building = Instantiate(building, node.worldPosition, Quaternion.identity);
 
-            //For the sake of a cleaner hierarchy
-            node.building.transform.parent = transform;
+                //For the sake of a cleaner hierarchy
+                node.building.transform.parent = transform;
 
-            //Clear path for all enemies if a building is placed => they need to find a new path
-            enemies.ForEach(enemy => enemy.refreshPath = true);
-
+                //Clear path for all enemies if a building is placed => they need to find a new path
+                enemies.ForEach(enemy => enemy.refreshPath = true);
             return true;
         }
+        //returns null if unable to create building
         return false;
     }
 

@@ -112,12 +112,13 @@ public class PlayerHand : MonoBehaviour
 
         bool placed = grid.CreateBuilding(buildings[selectedBuilding].buildingPrefab);
 
-        if (placed) {
+        if (placed)
+        {
             pillows -= buildings[selectedBuilding].buildingCost;
             pillowText.text = pillows.ToString();
             return;
         }
-        Debug.Log("Cannot place building here");
+            Debug.Log("Cannot place building here");
     }
 
     private void OnDrawGizmos()

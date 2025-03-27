@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class BossHealth : EnemyHealth
 {
-    public void Start()
+    new public void Start()
     {
         base.Start();
         setHealth(getHealth() *50f);

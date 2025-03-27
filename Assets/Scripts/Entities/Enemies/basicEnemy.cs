@@ -15,10 +15,10 @@ public class basicEnemy : MonoBehaviour
 
     [SerializeField]
     int damage;
-
     Vector2 dir;
     float bedDistance, playerDistance, obstacleDistance,time;
-
+    //Used for freezing
+    public float freezeTimer;
     // Start is called before the first frame update
     void Start()
     {
@@ -36,23 +36,44 @@ public class basicEnemy : MonoBehaviour
 
         speed = Random.Range(speed -speedVariance, speed + speedVariance);
         acceleration = Random.Range(acceleration - accelerationVariance, acceleration + accelerationVariance);
+        //Initializes freezeTimer to 0f.
+        freezeTimer = 0f;
     }
 
     // Update is called once per frame
     void Update()
     {
-        bedDistance = Vector2.Distance(transform.position, bedPosition.position);
-        playerDistance = Vector2.Distance(transform.position, playerPosition.position);
+        // If it is 0 when update() is called, it can do the rest of its tasks.
+        if (freezeTimer <= 0f)
+        {
+            bedDistance = Vector2.Distance(transform.position, bedPosition.position);
+            playerDistance = Vector2.Distance(transform.position, playerPosition.position);
 
-        time -= Time.deltaTime;
-        if (time < 0) {
-            enemyHandler.attack(damage);
-            time = attackCD;
+            time -= Time.deltaTime;
+            if (time < 0)
+            {
+                enemyHandler.attack(damage);
+                time = attackCD;
+            }
+            if (playerDistance <= playerDetectionDistance && playerDistance < bedDistance)
+            {
+                dir = enemyHandler.moveDir(playerPosition.position);
+            }
+            else
+            {
+                dir = enemyHandler.moveDir(bedPosition.position);
+            }
+            //Makes sprite opaque if not frozen
+            Color r = gameObject.GetComponent<SpriteRenderer>().color;
+            gameObject.GetComponent<SpriteRenderer>().color = new Color(r.r, r.g, r.b, 1f);
         }
-        if (playerDistance <= playerDetectionDistance && playerDistance < bedDistance) {
-            dir = enemyHandler.moveDir(playerPosition.position);
-        } else {
-            dir = enemyHandler.moveDir(bedPosition.position);
+        else
+        {
+            freezeTimer -= Time.deltaTime;
+            speed = 0;
+            //Makes sprite translucent if frozen
+            Color r = gameObject.GetComponent<SpriteRenderer>().color;
+            gameObject.GetComponent<SpriteRenderer>().color = new Color(r.r, r.g, r.b, 0.5f);
         }
 
         //This was replaced by the above code, this would be more optimized if done properly
@@ -104,5 +125,10 @@ public class basicEnemy : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, attackRange);
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, playerDetectionDistance);
+    }
+    //Is called by iceProjectile on collision. Enemy cannot move for f seconds
+    public void freeze(float f)
+    {
+        freezeTimer = f;
     }
 }
