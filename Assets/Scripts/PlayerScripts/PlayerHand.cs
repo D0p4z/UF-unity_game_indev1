@@ -131,6 +131,7 @@ public class PlayerHand : MonoBehaviour
         if (grid.RepairBuilding(buildings[selectedBuilding].buildingPrefab))
         {
             pillows--;
+            pillowText.text = pillows.ToString();
             Debug.Log("Repaired");
             return;
         }
@@ -138,9 +139,15 @@ public class PlayerHand : MonoBehaviour
         else
         {
             //Decreases pillows by repairCost if it can upgrade
-            pillows -=grid.UpgradeBuilding(buildings[selectedBuilding].buildingPrefab,pillows);
+            int c=grid.UpgradeBuilding(buildings[selectedBuilding].buildingPrefab,pillows);
+            pillows -= c;
+            pillowText.text = pillows.ToString();
+            if (c > 0)
+            {
+                Debug.Log("Upgraded");
+            }
+            return;
         }
-        Debug.Log("Failed to Repair");
     }
 
     private void OnDrawGizmos()

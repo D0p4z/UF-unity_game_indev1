@@ -132,7 +132,7 @@ public class PathfindingGrid : MonoBehaviour
         Node node = NodeFromWorldPoint(buildPlacement.position);
         if (node.worldPosition.y == 0.5f && (node.worldPosition.x == 0.5 || node.worldPosition.x == -0.5f))
             return false;
-        if (node.building != null&& node.building.GetComponent<BuildingHealth>().currentHealth != node.building.GetComponent<BuildingHealth>().buildingScriptableObject.buildingHealth)
+        if (node.building != null&& node.building.GetComponent<BuildingHealth>().currentHealth < node.building.GetComponent<BuildingHealth>().buildingScriptableObject.buildingHealth)
         {
             node.building.GetComponent<BuildingHealth>().currentHealth = node.building.GetComponent<BuildingHealth>().buildingScriptableObject.buildingHealth;
             return true;
@@ -147,10 +147,10 @@ public class PathfindingGrid : MonoBehaviour
         Node node = NodeFromWorldPoint(buildPlacement.position);
         if (node.building != null
             &&node.building.GetComponent<BuildingHealth>().currentHealth == node.building.GetComponent<BuildingHealth>().buildingScriptableObject.buildingHealth
-            &&pillows>=node.building.GetComponent<BuildingHealth>().repairCost)
+            &&pillows>=node.building.GetComponent<BuildingHealth>().upgradeCost)
         {
             node.building.GetComponent<BuildingHealth>().Upgrade();
-            return node.building.GetComponent<BuildingHealth>().repairCost;
+            return node.building.GetComponent<BuildingHealth>().upgradeCost;
         }
         return 0;
     }

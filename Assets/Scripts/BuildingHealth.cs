@@ -4,14 +4,14 @@ public class BuildingHealth : MonoBehaviour
 {
     public BuildingScriptableObject buildingScriptableObject;
     //Used in repairing: increments with each upgrade
-    public int repairCost;
+    public int upgradeCost;
     [HideInInspector]
     public int currentHealth;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        repairCost = 1;
+        upgradeCost= 1;
         currentHealth = buildingScriptableObject.buildingHealth;
     }
 
@@ -28,7 +28,7 @@ public class BuildingHealth : MonoBehaviour
     //if it's a turret, moderately increases health and range
     public void Upgrade()
     {
-        repairCost++;
+        upgradeCost++;
         if (gameObject.GetComponent<basicTurret>() != null)
         {
             currentHealth *= 6;
