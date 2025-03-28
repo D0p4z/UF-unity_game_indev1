@@ -4,14 +4,15 @@ public class BuildingHealth : MonoBehaviour
 {
     public BuildingScriptableObject buildingScriptableObject;
     //Used in repairing: increments with each upgrade
+    [SerializeField]
     public int upgradeCost;
-    [HideInInspector]
+    [SerializeField]
     public int currentHealth;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        upgradeCost= 1;
+        upgradeCost=0;
         currentHealth = buildingScriptableObject.buildingHealth;
     }
 

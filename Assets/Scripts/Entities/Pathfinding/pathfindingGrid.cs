@@ -147,9 +147,10 @@ public class PathfindingGrid : MonoBehaviour
         Node node = NodeFromWorldPoint(buildPlacement.position);
         if (node.building != null
             &&node.building.GetComponent<BuildingHealth>().currentHealth == node.building.GetComponent<BuildingHealth>().buildingScriptableObject.buildingHealth
-            &&pillows>=node.building.GetComponent<BuildingHealth>().upgradeCost)
+            &&pillows>=node.building.GetComponent<BuildingHealth>().upgradeCost+1)
         {
             node.building.GetComponent<BuildingHealth>().Upgrade();
+            Debug.Log(node.building.GetComponent<BuildingHealth>().upgradeCost);
             return node.building.GetComponent<BuildingHealth>().upgradeCost;
         }
         return 0;
